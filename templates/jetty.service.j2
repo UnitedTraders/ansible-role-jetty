@@ -1,0 +1,12 @@
+[Unit]
+Description=Jetty provides a Web server and javax.servlet container, plus support for HTTP/2, WebSocket, OSGi, JMX, JNDI, JAAS and many other integrations.
+After=network.target
+
+[Service]
+WorkingDirectory={{ jetty_dst_dir }}/current
+ExecStart={{ jetty_dst_dir }}/current/bin/jetty.sh run
+User={{ jetty_user_login }}
+Group={{ jetty_group_name }}
+
+[Install]
+WantedBy=multi-user.target

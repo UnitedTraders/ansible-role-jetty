@@ -1,0 +1,22 @@
+---
+- name: Create group
+  group:
+    name="{{ jetty_group_name }}"
+    state=present
+    system=yes
+  when: jetty_group_create
+  tags: jetty
+
+- name: Create user
+  user:
+    name="{{ jetty_user_login }}"
+    state=present
+    comment='Jetty Web Server'
+    createhome=yes
+    group={{ jetty_group_name }}
+    groups={{ jetty_groups_name }}
+    home={{ jetty_user_homedir }}
+    shell=/usr/sbin/nologin
+    system=yes
+  when: jetty_user_create
+  tags: jetty

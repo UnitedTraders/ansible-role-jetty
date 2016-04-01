@@ -1,0 +1,34 @@
+---
+- name: Download distribution tarball
+  get_url:
+    url="http://download.eclipse.org/jetty/{{ jetty_version }}/dist/jetty-distribution-{{ jetty_version }}.tar.gz"
+    dest={{ jetty_src_dir }}
+  tags: jetty
+
+- name: Make sure destination dir exists
+  file: path="{{ jetty_dst_dir }}" state=directory
+
+- name: Unpack distribution
+  unarchive: 
+    dest="{{ jetty_dst_dir }}" 
+    src="{{ jetty_src_dir }}/jetty-distribution-{{ jetty_version }}.tar.gz"
+    copy="no"
+    owner="{{ jetty_user_login }}"
+    group="{{ jetty_group_name}}"
+  tags: jetty
+
+- name: clear out included jetty webapps
+  file: name="{{ jetty_dst_dir }}/jetty-distribution-{{ jetty_version }}/webapps/*" state=absent
+  tags: jetty
+
+- name: clear out included jetty contexts
+  file: name="{{ jetty_dst_dir }}/jetty-distribution-{{ jetty_version }}/contexts/*" state=absent
+  tags: jetty
+
+- name: Create symbolic link to distribution
+  file:
+    src="{{ jetty_dst_dir }}/jetty-distribution-{{ jetty_version }}"
+    dest={{ jetty_dst_dir }}/current
+    state=link
+    force=yes
+  tags: jetty
