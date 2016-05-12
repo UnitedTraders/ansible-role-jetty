@@ -15,4 +15,6 @@ galaxy_info:
   categories:
   - system
   - web
-dependencies: []
+dependencies:
+  - role: ansiblebit.oracle-java
+    oracle_java_set_as_default: yes
