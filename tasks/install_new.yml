@@ -9,8 +9,8 @@
   file: path="{{ jetty_dst_dir }}" state=directory
 
 - name: Unpack distribution
-  unarchive: 
-    dest="{{ jetty_dst_dir }}" 
+  unarchive:
+    dest="{{ jetty_dst_dir }}"
     src="{{ jetty_src_dir }}/jetty-distribution-{{ jetty_version }}.tar.gz"
     copy="no"
     owner="{{ jetty_user_login }}"

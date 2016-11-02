@@ -6,11 +6,11 @@
   ignore_errors: yes
   tags: jetty
 
-- set_fact: 
+- set_fact:
     jetty_required: false
   tags: jetty
 
-- set_fact: 
+- set_fact:
     jetty_required: true
   when: jetty_current.stdout.find("jetty-distribution-{{ jetty_version }}") == -1
   tags: jetty
